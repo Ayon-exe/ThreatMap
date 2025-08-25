@@ -94,7 +94,7 @@ const convertToMaliciousIP = (rawIP: RawMaliciousIP): MaliciousIP => {
 // Function to fetch malicious IPs
 export const fetchMaliciousIPs = async (): Promise<MaliciousIP[]> => {
   try {
-    const response = await fetch("http://localhost:5000/malicious-ips");
+  const response = await fetch("/malicious-ips");
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }

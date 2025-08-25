@@ -348,7 +348,7 @@ const News: React.FC<NewsProps> = ({ useSSE = false, itemsPerPage = 3 }) => {
     if (!useSSE) {
       const loadNewsData = async () => {
         try {
-          const response = await fetch("http://localhost:5000/news");
+    const response = await fetch("/news");
           if (!response.ok) {
             throw new Error("Failed to fetch news data");
           }

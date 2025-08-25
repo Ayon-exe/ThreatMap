@@ -62,7 +62,7 @@ export const startThreatSSEConnection = (
   onThreat: (threats: Attack[]) => void,
   onError: (error: Event) => void
 ): EventSource => {
-  const eventSource = new EventSource("http://localhost:5000/threats");
+  const eventSource = new EventSource("/threats");
 
   eventSource.onmessage = (event) => {
     try {

@@ -58,7 +58,7 @@ const convertSSEToAttack = (rawThreat: RawSSEThreat): Attack => {
 // Handle messages from the main thread
 self.onmessage = (event: MessageEvent) => {
   if (event.data.type === "START_SSE") {
-    const eventSource = new EventSource("http://localhost:5000/threats");
+  const eventSource = new EventSource("/threats");
 
     eventSource.onmessage = (event) => {
       try {
