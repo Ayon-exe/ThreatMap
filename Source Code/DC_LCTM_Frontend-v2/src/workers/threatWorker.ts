@@ -63,16 +63,23 @@ self.onmessage = (event: MessageEvent) => {
     eventSource.onmessage = (event) => {
       try {
         const data = event.data;
-        if (data === "[]") {
+        const trimmed = data && data.trim();
+        if (!trimmed || trimmed === "[]") {
           self.postMessage({ type: "THREATS", data: [] });
           return;
         }
 
-        const rawThreats: RawSSEThreat[] = JSON.parse(data);
+        let rawThreats: RawSSEThreat[];
+        try {
+          rawThreats = JSON.parse(trimmed);
+        } catch (err) {
+          self.postMessage({ type: "ERROR", error: "Error parsing SSE data: " + trimmed });
+          return;
+        }
         const threats = rawThreats.map(convertSSEToAttack);
         self.postMessage({ type: "THREATS", data: threats });
       } catch (error) {
-        self.postMessage({ type: "ERROR", error: "Error parsing SSE data" });
+        self.postMessage({ type: "ERROR", error: "Error parsing SSE data (outer catch)" });
       }
     };
 
